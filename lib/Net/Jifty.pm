@@ -458,7 +458,7 @@ sub escape {
     my $self = shift;
 
     return map { s/([^a-zA-Z0-9_.!~*'()-])/uc sprintf("%%%02X", ord $1)/eg; $_ }
-           map { Encode::encode_utf8($_) }
+           map { Encode::is_utf8($_) ? Encode::encode_utf8($_) : $_ }
            @_
 }
 
